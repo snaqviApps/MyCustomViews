@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MyCustomViews</string>
+    <string name="customized_member_button_cta">Customized Button</string>
+    <string name="customized_member_text_view">Customized member Text View</string>
+</resources>
