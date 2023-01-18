@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="customXMLViewModel"
+            type="ghar.learn.mycustomviews.views.BasicRetrofitCallViewModel" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/idCustomViewFirst"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -42,5 +48,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cvTextViewXML" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
