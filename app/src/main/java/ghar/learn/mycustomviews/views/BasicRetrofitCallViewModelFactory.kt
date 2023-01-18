@@ -2,10 +2,9 @@ package ghar.learn.mycustomviews.views
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ghar.learn.mycustomviews.backend.BackEndRepository
+import ghar.learn.mycustomviews.api.BackEndRepository
 
 class BasicRetrofitCallViewModelFactory constructor(private val repository: BackEndRepository): ViewModelProvider.Factory {
-//class BasicRetrofitCallViewModelFactory constructor(): ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(BasicRetrofitCallViewModel::class.java)) {
