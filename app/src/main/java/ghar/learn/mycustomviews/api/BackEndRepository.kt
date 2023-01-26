@@ -1,9 +1,9 @@
 package ghar.learn.mycustomviews.api
 
+import GithubUserProfile
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ghar.learn.mycustomviews.model.GitHubBasicInfoModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
@@ -14,13 +14,13 @@ const val MAX_TIME_OUT: Long = 2000L
 
 class BackEndRepository {
 
-    private var _backEndDataProvider =  MutableLiveData<Array<GitHubBasicInfoModel>?>()
-    val backEndDataProvider : LiveData<Array<GitHubBasicInfoModel>?> = _backEndDataProvider
-
+    private var _backEndDataProvider =  MutableLiveData<List<GithubUserProfile?>?>()
+    val backEndDataProvider : MutableLiveData<List<GithubUserProfile?>?> = _backEndDataProvider
     private val TAG: String? = this.javaClass.canonicalName
 
     private var githubApi: GithubApi
-    private val baseUrl = "https://api.github.com/"
+    private val baseUrl = "https://api.github.com"
+
     private fun provideRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create())
@@ -35,10 +35,12 @@ class BackEndRepository {
         withContext(Dispatchers.IO) {
             withTimeout(MAX_TIME_OUT) {
                 try {
-                    val rawGithubData = githubApi.getGithubInfo()?.toTypedArray()
+                    val rawGithubData = githubApi.getGithubInfo()
                     rawGithubData?.let {
+                        Log.d(TAG, "github-data: $rawGithubData")
                         _backEndDataProvider.value = rawGithubData
-                    } ?: {
+
+                    } ?:run {
                         _backEndDataProvider.value = null
                     }
                 } catch (ex : Exception){

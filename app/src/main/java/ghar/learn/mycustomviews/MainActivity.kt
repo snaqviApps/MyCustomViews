@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewTreeLifecycleOwner
 import ghar.learn.mycustomviews.api.BackEndRepository
 import ghar.learn.mycustomviews.databinding.ActivityMainBinding
 import ghar.learn.mycustomviews.databinding.CustomviewfirstBinding
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 //        viewModel = ViewModelProvider(this)[BasicRetrofitCallViewModel::class.java]       // no-factory approach
         viewModel = ViewModelProvider(this, BasicRetrofitCallViewModelFactory(repository = BackEndRepository()))[BasicRetrofitCallViewModel::class.java]
         viewBasedBindingCustomView.customXMLViewModel = viewModel
+//        viewBasedBinding = ViewTreeLifecycleOwner
 
         viewBasedBinding.idMainCustmView.customMemberButton.let {
             it.visibility = View.VISIBLE
@@ -41,21 +43,20 @@ class MainActivity : AppCompatActivity() {
                 viewModel.uiDataProvider.observe(this) { buttonGithubAccess ->
                     buttonGithubAccess?.let {
                         Toast.makeText(this, "gitHub call response list size: ${buttonGithubAccess.size}", Toast.LENGTH_LONG).show()
-                        Log.i(_TAG, "Hi button using githubResponse : ${buttonGithubAccess.size}")
+                        Log.i("main", "Hi button using githubResponse : ${buttonGithubAccess.size}")
                     } ?:run {
                         Toast.makeText(this, "gitHub call response list size is zero: ${buttonGithubAccess?.size}", Toast.LENGTH_SHORT).show()
-                        Log.i(_TAG, "Hi button using githubResponse : ${buttonGithubAccess?.size ?: ""}")
+                        Log.i(_TAG, "Hi button using githubResponse : ${buttonGithubAccess?.size.toString() ?: ""}")
                     }
                 }
             }
         }
-
         displayGithubResponseInToast()
     }
 
     private fun displayGithubResponseInToast() {
 //        viewModel.uiDataProvider.observe(this, Observer{
-        viewModel.uiDataProvider.observe(this) {
+        this.viewModel.uiDataProvider.observe(this) {
             it?.let {
                 Toast.makeText(this, "gitHub call response list size: ${it.size}", Toast.LENGTH_SHORT).show()
                 Log.i(_TAG, "Hi button using githubResponse : ${it.size}")
