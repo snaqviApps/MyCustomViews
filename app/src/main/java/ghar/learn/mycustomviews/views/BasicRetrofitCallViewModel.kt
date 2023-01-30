@@ -1,6 +1,6 @@
 package ghar.learn.mycustomviews.views
 
-import GithubUserProfile
+import GithubUserData
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +11,7 @@ class BasicRetrofitCallViewModel(private val repository: BackEndRepository) : Vi
 //class BasicRetrofitCallViewModel() : ViewModel() {
 
     private val repositoryLocal = BackEndRepository()
-    var uiDataProvider : LiveData<List<GithubUserProfile?>?>
+    var uiDataProvider : LiveData<List<GithubUserData?>?>
 
     init {
         getBackEndData()

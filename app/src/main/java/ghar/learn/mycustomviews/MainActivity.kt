@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        displayGithubResponseInToast()
+//        displayGithubResponseInToast()
     }
 
     private fun displayGithubResponseInToast() {

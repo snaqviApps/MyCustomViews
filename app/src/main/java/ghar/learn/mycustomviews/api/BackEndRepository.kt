@@ -1,6 +1,6 @@
 package ghar.learn.mycustomviews.api
 
-import GithubUserProfile
+import GithubUserData
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,12 +10,12 @@ import kotlinx.coroutines.withTimeout
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val MAX_TIME_OUT: Long = 2000L
+const val MAX_TIME_OUT: Long = 500L
 
 class BackEndRepository {
 
-    private var _backEndDataProvider =  MutableLiveData<List<GithubUserProfile?>?>()
-    val backEndDataProvider : MutableLiveData<List<GithubUserProfile?>?> = _backEndDataProvider
+    private var _backEndDataProvider =  MutableLiveData<List<GithubUserData?>?>()
+    val backEndDataProvider : LiveData<List<GithubUserData?>?> = _backEndDataProvider
     private val TAG: String? = this.javaClass.canonicalName
 
     private var githubApi: GithubApi
