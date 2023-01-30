@@ -1,21 +1,22 @@
 package ghar.learn.mycustomviews.api
 
-import GithubUserData
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import ghar.learn.mycustomviews.model.GithubPojo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val MAX_TIME_OUT: Long = 500L
+const val MAX_TIME_OUT: Long = 1400L
 
 class BackEndRepository {
 
-    private var _backEndDataProvider =  MutableLiveData<List<GithubUserData?>?>()
-    val backEndDataProvider : LiveData<List<GithubUserData?>?> = _backEndDataProvider
+    private var _backEndDataProvider =  MutableLiveData<GithubPojo?>()                  //   ---------> worked
+//    private var _backEndDataProvider =  MutableLiveData<ArrayList<GithubPojo?>?>()    // does not work
+    val backEndDataProvider : LiveData<GithubPojo?> = _backEndDataProvider
     private val TAG: String? = this.javaClass.canonicalName
 
     private var githubApi: GithubApi
@@ -38,10 +39,10 @@ class BackEndRepository {
                     val rawGithubData = githubApi.getGithubInfo()
                     rawGithubData?.let {
                         Log.d(TAG, "github-data: $rawGithubData")
-                        _backEndDataProvider.value = rawGithubData
+                        _backEndDataProvider.postValue(rawGithubData)
 
                     } ?:run {
-                        _backEndDataProvider.value = null
+                        _backEndDataProvider.postValue(null)
                     }
                 } catch (ex : Exception){
                     Log.e(TAG, "error message: ${ex.message}")
