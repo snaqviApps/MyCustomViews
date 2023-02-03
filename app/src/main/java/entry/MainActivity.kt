@@ -1,13 +1,12 @@
-package ghar.learn.mycustomviews
+package entry
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewTreeLifecycleOwner
+import ghar.learn.mycustomviews.R
 import ghar.learn.mycustomviews.api.BackEndRepository
 import ghar.learn.mycustomviews.databinding.ActivityMainBinding
 import ghar.learn.mycustomviews.databinding.CustomviewfirstBinding
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         viewBasedBinding = ActivityMainBinding.inflate(layoutInflater)
         viewBasedBindingCustomView = CustomviewfirstBinding.inflate(layoutInflater)
 
-        setContentView(R.layout.activity_main)
+//        setContentView(R.layout.activity_main)
         setContentView(viewBasedBinding.root)
 
 //        viewModel = ViewModelProvider(this)[BasicRetrofitCallViewModel::class.java]       // no-factory approach
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         viewBasedBindingCustomView.customXMLViewModel = viewModel
 //        viewBasedBinding = ViewTreeLifecycleOwner
 
-        viewBasedBinding.idMainCustmView.customMemberButton.let {
+        viewBasedBinding.idMainCustomView.customMemberButton.let {
             it.visibility = View.VISIBLE
             it.setOnClickListener {
                 Log.i(_TAG, "Hi button using viewBinding")

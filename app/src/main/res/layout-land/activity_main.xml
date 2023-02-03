@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="entry.MainActivity">
 
     <TextView
         android:id="@+id/tvDefault"
@@ -21,10 +21,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_main_custmView" />
+        app:layout_constraintTop_toBottomOf="@+id/id_main_customView" />
 
     <ghar.learn.mycustomviews.CustomViewFirst
-        android:id="@+id/id_main_custmView"
+        android:id="@+id/id_main_customView"
         android:layout_width="688dp"
         android:layout_height="251dp"
         android:layout_marginStart="16dp"

@@ -2,4 +2,6 @@
     <string name="app_name">MyCustomViews</string>
     <string name="customized_member_button_cta">Customized Button</string>
     <string name="customized_member_text_view">Customized member Text View</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hi B-FRAGMENT</string>
 </resources>
