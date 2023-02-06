@@ -26,14 +26,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.fragment_container_view_main, GithubUserProfileFragment())
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+
         viewBasedBinding = ActivityMainBinding.inflate(layoutInflater)
         viewBasedBindingCustomView = CustomviewfirstBinding.inflate(layoutInflater)
-
-//        setContentView(R.layout.activity_main)     // no data-binding approach
         setContentView(viewBasedBinding.root)
-
-
-//        viewModel = ViewModelProvider(this)[BasicRetrofitCallViewModel::class.java]       // no-factory approach
         viewModel = ViewModelProvider(this,
             BasicRetrofitCallViewModelFactory(repository = BackEndRepository()))[BasicRetrofitCallViewModel::class.java]
         viewBasedBindingCustomView.customXMLViewModel = viewModel

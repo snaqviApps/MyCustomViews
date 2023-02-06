@@ -52,8 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
-            android:name="ghar.learn.mycustomviews.GithubUserProfileFragment"
-            tools:layout="@layout/fragment_github_user_profile" />
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
