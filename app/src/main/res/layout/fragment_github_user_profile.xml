@@ -10,23 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/cardview_shadow_start_color"
-        tools:context=".GithubUserProfile">
+        tools:context=".GithubUserProfileFragment">
 
-        <TextView
-            android:layout_width="124dp"
-            android:layout_height="154dp"
-            android:orientation="horizontal"
-            android:rotation="0"
-            android:text="Github"
-            android:background="@color/cardview_light_background"
-            android:textAlignment="center"
-            android:textColor="@color/teal_700"
-            android:textSize="12sp"
-            android:textStyle="bold"
+        <ImageView
+            android:id="@+id/localImage"
+            android:layout_width="237dp"
+            android:layout_height="233dp"
+            android:layout_marginBottom="36dp"
+            android:src="@mipmap/ic_deer_from_png"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
+        <!--        android:background="@color/design_default_color_primary_dark"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

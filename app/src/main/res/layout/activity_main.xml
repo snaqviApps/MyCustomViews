@@ -20,7 +20,6 @@
         android:textColor="#455A64"
         android:textSize="42sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,15 +45,16 @@
         app:layout_constraintTop_toBottomOf="@+id/id_main_customView"
         app:layout_constraintVertical_bias="0.807">
 
-        <fragment
-            android:id="@+id/fragment_main"
-            android:name="ghar.learn.mycustomviews.GithubUserProfile"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_view_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
             tools:layout="@layout/fragment_github_user_profile" />
+<!--        tools:layout="@layout/fragment_github_user_profile"-->
+<!--        android:name="ghar.learn.mycustomviews.GithubUserProfile"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
