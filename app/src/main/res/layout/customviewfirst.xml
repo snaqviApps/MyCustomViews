@@ -28,13 +28,14 @@
         android:layout_height="98dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/customized_member_text_view"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/cvImageViewXML"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toEndOf="@+id/cvImageViewXML"
         app:layout_constraintTop_toTopOf="@+id/cvImageViewXML" />
+    <!--        android:text="@string/customized_member_text_view"-->
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cvButtonViewXML"

@@ -1,4 +1,4 @@
-package ghar.learn.mycustomviews
+package ghar.learn.mycustomviews.views.custom
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import ghar.learn.mycustomviews.R
 
 class CustomViewFirst(context: Context?, attributeSet: AttributeSet) : LinearLayout(context, attributeSet) {
 

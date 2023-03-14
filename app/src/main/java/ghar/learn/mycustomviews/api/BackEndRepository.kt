@@ -3,21 +3,29 @@ package ghar.learn.mycustomviews.api
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ghar.learn.mycustomviews.model.GithubPojo
+import ghar.learn.mycustomviews.model.GithubUserProfile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.reflect.jvm.internal.impl.load.java.structure.JavaClass
 
 const val MAX_TIME_OUT: Long = 1400L
 
 class BackEndRepository {
 
-    private var _backEndDataProvider =  MutableLiveData<GithubPojo?>()                  //   ---------> worked
-//    private var _backEndDataProvider =  MutableLiveData<ArrayList<GithubPojo?>?>()    // does not work
-    val backEndDataProvider : LiveData<GithubPojo?> = _backEndDataProvider
-    private val TAG: String? = this.javaClass.canonicalName
+    private val _tag  = BackEndRepository::javaClass.toString()
+
+    private lateinit var formattedOutput : String
+
+    //    private var _backEndDataProvider =  MutableLiveData<ArrayList<GithubPojo?>?>()           // does not work
+    private var _backEndDataProvider =  MutableLiveData<GithubUserProfile?>()                  //   ---------> worked
+    val backEndDataProvider : LiveData<GithubUserProfile?> = _backEndDataProvider
 
     private var githubApi: GithubApi
     private val baseUrl = "https://api.github.com"
@@ -38,14 +46,18 @@ class BackEndRepository {
                 try {
                     val rawGithubData = githubApi.getGithubInfo()
                     rawGithubData?.let {
-                        Log.d(TAG, "github-data: $rawGithubData")
+//                        val jsonArray = buildJsonArray { githubUserProfile }
+                        val builtJsonObject = buildJsonObject {
+                            formattedOutput  = it.avatarUrl.toString()
+                        }
+                        Log.d(_tag, "github-data: ${it}, '\n', avaterUrl: $formattedOutput")
                         _backEndDataProvider.postValue(rawGithubData)
 
                     } ?:run {
                         _backEndDataProvider.postValue(null)
                     }
                 } catch (ex : Exception){
-                    Log.e(TAG, "error message: ${ex.message}")
+                    Log.e(_tag, "error message: ${ex.message}")
                 }
             }
         }

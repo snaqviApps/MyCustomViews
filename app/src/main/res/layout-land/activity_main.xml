@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_main_customView" />
 
-    <ghar.learn.mycustomviews.CustomViewFirst
+    <ghar.learn.mycustomviews.views.custom.CustomViewFirst
         android:id="@+id/id_main_customView"
         android:layout_width="688dp"
         android:layout_height="251dp"
