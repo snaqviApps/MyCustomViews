@@ -8,5 +8,4 @@ const val GITHUB_END_POINT = "/users/snaqviapps"
 interface GithubApi {
         @GET(GITHUB_END_POINT)
         suspend fun getGithubInfo() : GithubUserProfile?                        // ----> worked
-//        suspend fun getGithubInfo() : ArrayList<GithubPojo?>?                 // ----> does not work
 }

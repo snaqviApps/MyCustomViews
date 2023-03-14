@@ -15,10 +15,11 @@ import ghar.learn.mycustomviews.databinding.CustomviewfirstBinding
 import ghar.learn.mycustomviews.model.GithubUserProfile
 import ghar.learn.mycustomviews.views.BasicRetrofitCallViewModel
 import ghar.learn.mycustomviews.views.BasicRetrofitCallViewModelFactory
+import kotlin.reflect.jvm.jvmName
 
 class MainActivity : AppCompatActivity() {
 
-    private val _mainTag: String by lazy { localClassName }
+    private val _mainTag = this::class.simpleName
     private lateinit var repository: BackEndRepository         // for later considerations
     private lateinit var viewBasedBinding: ActivityMainBinding
     private lateinit var viewBasedBindingCustomView: CustomviewfirstBinding
@@ -43,9 +44,7 @@ class MainActivity : AppCompatActivity() {
                 viewModel.uiDataProvider.observe(this) { githubData: GithubUserProfile? ->
                     githubData?.let {
                         Toast.makeText(this, "avatarUrl: ${githubData.avatarUrl}", Toast.LENGTH_LONG).show()
-
                         viewBasedBinding.idMainCustomView.customMemberTextView.text = githubData.avatarUrl
-
                         Log.i(_mainTag, "Hi button using githubResponse : $githubData")
                     } ?: run {
                         Toast.makeText(this, "gitHub call response list size is zero: ", Toast.LENGTH_SHORT).show()

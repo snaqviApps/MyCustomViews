@@ -7,13 +7,9 @@ import ghar.learn.mycustomviews.model.GithubUserProfile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
-import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.json.jsonObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.reflect.jvm.internal.impl.load.java.structure.JavaClass
 
 const val MAX_TIME_OUT: Long = 1400L
 
@@ -23,8 +19,8 @@ class BackEndRepository {
 
     private lateinit var formattedOutput : String
 
-    //    private var _backEndDataProvider =  MutableLiveData<ArrayList<GithubPojo?>?>()           // does not work
-    private var _backEndDataProvider =  MutableLiveData<GithubUserProfile?>()                  //   ---------> worked
+    //    private var _backEndDataProvider =  MutableLiveData<ArrayList<GithubPojo?>?>()       // does not work
+    private var _backEndDataProvider =  MutableLiveData<GithubUserProfile?>()                  // worked
     val backEndDataProvider : LiveData<GithubUserProfile?> = _backEndDataProvider
 
     private var githubApi: GithubApi
@@ -46,8 +42,7 @@ class BackEndRepository {
                 try {
                     val rawGithubData = githubApi.getGithubInfo()
                     rawGithubData?.let {
-//                        val jsonArray = buildJsonArray { githubUserProfile }
-                        val builtJsonObject = buildJsonObject {
+                        buildJsonObject {
                             formattedOutput  = it.avatarUrl.toString()
                         }
                         Log.d(_tag, "github-data: ${it}, '\n', avaterUrl: $formattedOutput")
