@@ -45,7 +45,7 @@ class BackEndRepository {
                         buildJsonObject {
                             formattedOutput  = it.avatarUrl.toString()
                         }
-                        Log.d(_tag, "github-data: ${it}, '\n', avaterUrl: $formattedOutput")
+                        Log.d(_tag, "github-data: ${it}, '\n', avaterUrl-repo: $formattedOutput")
                         _backEndDataProvider.postValue(rawGithubData)
 
                     } ?:run {

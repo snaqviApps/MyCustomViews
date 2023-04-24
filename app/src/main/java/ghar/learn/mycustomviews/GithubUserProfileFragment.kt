@@ -5,7 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import ghar.learn.mycustomviews.api.BackEndRepository
 import ghar.learn.mycustomviews.databinding.FragmentGithubUserProfileBinding
+import ghar.learn.mycustomviews.views.BasicRetrofitCallAdapter
+import ghar.learn.mycustomviews.views.BasicRetrofitCallViewModel
+import ghar.learn.mycustomviews.views.BasicRetrofitCallViewModelFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,7 +28,8 @@ class GithubUserProfileFragment : Fragment(R.layout.fragment_github_user_profile
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var fragmentGithubUserProfileBinding: FragmentGithubUserProfileBinding
+    private lateinit var fragmentGithubUserProfileBinding : FragmentGithubUserProfileBinding
+    private lateinit var fragmentViewModel: BasicRetrofitCallViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +43,32 @@ class GithubUserProfileFragment : Fragment(R.layout.fragment_github_user_profile
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_github_user_profile, container, false).rootView     // no binding used
         fragmentGithubUserProfileBinding = FragmentGithubUserProfileBinding.inflate(layoutInflater)
+        fragmentViewModel = ViewModelProvider(this, BasicRetrofitCallViewModelFactory(repository = BackEndRepository()))[BasicRetrofitCallViewModel::class.java]
+        rvSetup()
+        setUserDataOnRView()
         return fragmentGithubUserProfileBinding.root
 
     }
+    private fun rvSetup() {
+//        TODO("Not yet implemented")
+        fragmentGithubUserProfileBinding.fragUseProfileViewModel = fragmentViewModel
+        fragmentGithubUserProfileBinding.lifecycleOwner = viewLifecycleOwner
+    }
+
+
+    private fun setUserDataOnRView() {
+//        TODO("Not yet implemented")
+
+        fragmentViewModel.uiDataProvider?.observe(viewLifecycleOwner, Observer { githuUser ->
+            val adapter = BasicRetrofitCallAdapter(githuUser)
+            fragmentGithubUserProfileBinding.rvUserData.adapter = adapter
+        })
+
+    }
+
+
     companion object {
         /**
          * Use this factory method to create a new instance of

@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 class BasicRetrofitCallViewModel(private val repository: BackEndRepository) : ViewModel() {
 
-    var uiDataProvider : LiveData<GithubUserProfile?>
+    var uiDataProvider : LiveData<GithubUserProfile?>?
     init {
         getBackEndData()
         uiDataProvider = repository.backEndDataProvider

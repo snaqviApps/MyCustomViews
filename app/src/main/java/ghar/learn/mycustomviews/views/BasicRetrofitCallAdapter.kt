@@ -3,16 +3,24 @@ package ghar.learn.mycustomviews.views
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ghar.learn.mycustomviews.R
 import ghar.learn.mycustomviews.databinding.CustomviewfirstBinding
 import ghar.learn.mycustomviews.model.GithubUserProfile
+import kotlinx.coroutines.NonDisposableHandle.parent
 import kotlin.reflect.full.memberProperties
 
 class BasicRetrofitCallAdapter(private val userprofile: GithubUserProfile?) : RecyclerView.Adapter<BasicRetrofitCallAdapter.GithubProfileViewHolder>() {
 
-    class GithubProfileViewHolder(
-        private val binding : CustomviewfirstBinding):RecyclerView.ViewHolder(binding.root) {
+    class GithubProfileViewHolder(private val custombinding : CustomviewfirstBinding) :
+        RecyclerView.ViewHolder(custombinding.root) {
+//        fun bindData(githubUserProfile: GithubUserProfile) {
         fun bindData(githubUserProfile: GithubUserProfile) {
-            binding.cvTextViewXML.text = githubUserProfile.name
+            custombinding.cvTextViewXML.text = githubUserProfile.name
+
+            /** use the Picasso to load the Image */
+//            binding.cvImageViewXML.setImageResource(R.drawable.ic_deer_from_png_background)
+            custombinding.cvTextViewXMLCompany.text = githubUserProfile.company
+            custombinding.cvTextViewXmlGisTs.text = githubUserProfile.gistsUrl
         }
 
     }
@@ -23,22 +31,14 @@ class BasicRetrofitCallAdapter(private val userprofile: GithubUserProfile?) : Re
         return GithubProfileViewHolder(binding)
     }
 
-    // check if that is a valid utilization of getItemCount() callback
     override fun getItemCount(): Int {
-        lateinit var pair: Pair<String, Any?>
-        val totalProperties = userprofile?.describeContents() as Int
-        for (i in 0..totalProperties) {
-            userprofile::class.memberProperties.forEach { member ->
-                member.typeParameters.let {
-                    pair = Pair(member.name, member.returnType)
-                }
-            }
-        }
-        return pair.toList().size
+        return userprofile?.publicRepos ?: -1
     }
 
+    // check if that is a valid utilization of getItemCount() callback
+
+
     override fun onBindViewHolder(holder: GithubProfileViewHolder, position: Int) {
-//        TODO("Not yet implemented")
         userprofile?.let {
             holder.bindData(it)
         }
